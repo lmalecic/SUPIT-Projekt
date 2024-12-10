@@ -1,6 +1,60 @@
+/* Algebra Font lmao */
+@font-face {
+    font-family: 'Stolzl';
+    src: url('font/Stolzl-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Stolzl';
+    src: url('font/Stolzl-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Stolzl';
+    src: url('font/Stolzl-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Stolzl Book';
+    src: url('font/Stolzl-Book.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Stolzl';
+    src: url('font/Stolzl-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Stolzl';
+    src: url('font/Stolzl-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 :root {
-    --header-color: #000;
-    font-family: 'Roboto', sans-serif;
+    --orange: rgb(226,117,38);
+    --pink: rgb(191,26,102);
+    --link-color: var(--pink);
+    --link-hover-color: var(--orange);
+    --link-hover-gradient: linear-gradient(30deg, var(--orange) 0%, var(--pink) 100%);
+    font-family: "Stolzl", sans-serif;
 }
 
 * {
@@ -15,31 +69,55 @@
                          "content"
                          "footer";
     grid-template-columns: auto;
-    grid-template-rows: 64px auto 1fr 32px;
+    grid-template-rows: 4rem auto 1fr 2rem;
     height: 100vh;
 }
 
-.navbar, .header {
+.navbar, .header, .footer {
     display: flex;
     align-items: center;
     justify-content: center;
 
-    background-color: color-mix(in srgb, var(--header-color), white 10%);
+    background: #000;
 }
 
 .header {
-    background-color: var(--header-color);
+    background-color: #000;
 }
 
 .navbar {
-    height: 32px;
+    height: 2rem;
+    padding-bottom: 0.5rem;
 }
 
 .navbar-item {
-    font-weight: bolder;
+    color: #fff;
+    font-weight: 1000;
+    margin: 0 1em;
+    text-align: center;
+}
+
+.navbar-item:hover {
+    color: var(--link-hover-color);
+    background: var(--link-hover-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .logo {
-    height: 100%;
-    transform: translateY(-20%);
+    background-image: url("https://www.algebra.hr/wp-content/uploads/2021/10/Algebra_glavni.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 120%;
+    transform: translateY(-15%);
+}
+
+a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+a:hover {
+    text-decoration: underline;
 }
