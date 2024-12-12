@@ -73,7 +73,7 @@
     height: 100vh;
 }
 
-.navbar, .header, .footer {
+.header, .navbar, .footer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,11 +90,28 @@
     padding-bottom: 0.5rem;
 }
 
+.footer {
+    font-size: 0.8rem;
+    color: grey;
+}
+
 .navbar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 1em;
     color: #fff;
     font-weight: 1000;
-    margin: 0 1em;
     text-align: center;
+}
+
+.navbar-item[style]::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.3em;
+    background: var(--icon) no-repeat center/contain;
 }
 
 .navbar-item:hover {
@@ -102,13 +119,23 @@
     background: var(--link-hover-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+
+    &::before {
+        background-color: var(--link-hover-gradient);
+    }
+}
+
+#nastavniPlan {
+    display: none;
+
+    &:is(.loggedIn) {
+        display: inline-block;
+    }
 }
 
 .logo {
-    background-image: url("https://www.algebra.hr/wp-content/uploads/2021/10/Algebra_glavni.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
+    background: url("https://www.algebra.hr/wp-content/uploads/2021/10/Algebra_glavni.svg") no-repeat center/contain;
+    width: 14rem;
     height: 120%;
     transform: translateY(-15%);
 }
@@ -120,4 +147,9 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+#loginButton {
+    position: absolute;
+    right: 1rem;
 }

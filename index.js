@@ -1,0 +1,1 @@
+getElementById("nastavniPlan").classList.add("loggedIn");
