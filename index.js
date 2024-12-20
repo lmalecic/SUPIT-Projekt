@@ -1,5 +1,5 @@
 // Pričekaj da se učita prozor kako bi mogli dohvatiti elemente
-window.onload = async () => {
+window.addEventListener("load", async () => {
     // document.getElementById("nastavniPlan").classList.add("isLoggedIn");
     const elements = document.getElementsByClassName("typewriter")
 
@@ -9,7 +9,7 @@ window.onload = async () => {
         element.setAttribute("step", "0")
         await typeWriter(element)
     }
-}
+})
 
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve,ms))
