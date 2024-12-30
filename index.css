@@ -104,7 +104,7 @@ nav {
 
 .content {
     background: white;
-    padding: 2rem;
+    padding: 2rem 10vw;
 }
 
 .footer {
@@ -171,6 +171,17 @@ nav {
     transform: translateY(-15%);
 }
 
+h1 {
+    color: var(--pink);
+    text-align: center;
+    margin: 1em;
+}
+
+p {
+    margin: 1em;
+    text-align: justify;
+}
+
 a {
     text-decoration: none;
     color: var(--link-color);
@@ -197,14 +208,14 @@ a:hover {
     flex-direction: column;
     border-radius: min(4vw, 3rem);
     overflow: hidden;
-    max-width: 70rem;
     width: 100%;
-    margin: auto;
+    margin: 0 auto 1rem auto;
     position: relative;
     border: 3px solid rgba(0,0,0,10%);
 
     color: white;
-    font-size: 1.3rem;
+    font-size: 3em;
+    font-weight: bold;
     text-shadow: 3px 3px 0 #000;
     text-align: center;
 
@@ -221,9 +232,11 @@ a:hover {
     background-position: 50%;
     background-repeat: no-repeat;
     background-clip: content-box;
-    aspect-ratio: 5;
+    aspect-ratio: 4;
 
-    font-size: clamp(.9rem, 2vw, 1.3rem);
+    font-size: clamp(1.5em, 4vw, 3em);
+
+    z-index: 2;
 }
 
 #video {
@@ -236,9 +249,9 @@ a:hover {
 
 .video-container video {
     position: absolute;
+    height: 100%;
     width: auto;
     max-width: none;
-    height: 100%;
     object-fit: cover;
     z-index: 1;
 }

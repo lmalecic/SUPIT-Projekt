@@ -1,0 +1,34 @@
+.header-navbar {
+    min-height: 2rem;
+    overflow-y: hidden;
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    z-index: 1;
+}
+
+.header-navbar-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 .25em .5em .25em;
+    padding: 0.5em 1em;
+    color: #fff;
+    font-weight: 1000;
+    text-align: center;
+    
+    background-color: #000;
+    border-radius: 100px;
+}
+
+.header-navbar-item:hover {
+    color: var(--link-hover-color);
+    text-decoration: none;
+
+    &::before {
+        background-color: var(--link-hover-gradient);
+    }
+}
