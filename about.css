@@ -1,13 +1,19 @@
 .header-navbar {
+    position: sticky;
+    top: 7.3rem;
+
     min-height: 2rem;
-    overflow-y: hidden;
     display: flex;
 
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
 
-    z-index: 1;
+    font-size: 1.2em;
+    z-index: 90;
+
+    margin-top: 1em;
+
 }
 
 .header-navbar-item {
@@ -20,8 +26,8 @@
     font-weight: 1000;
     text-align: center;
     
-    background-color: #000;
-    border-radius: 100px;
+    background-color: var(--black);
+    border-radius: 999em;
 }
 
 .header-navbar-item:hover {
@@ -30,5 +36,85 @@
 
     &::before {
         background-color: var(--link-hover-gradient);
+    }
+}
+
+.details-view {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-basis: auto;
+    flex-flow: row wrap;
+    margin-top: 2em;
+}
+
+.details-view-item {
+    flex: 1;
+    padding: 1.5em 2em;
+    margin: .8em;
+    align-self: stretch;
+    min-width: 320px;
+
+    font-size: .92em;
+
+    p {
+        color: var(--paragraph-color-2);
+        margin: 1em 0;
+    }
+
+    .year {
+        color: var(--pink);
+        font-size: 1.14em;
+        padding-right: 0.3em;
+    }
+}
+
+/* Hack za jump to section offset */
+.section {
+    padding-top: 9.5rem;
+    margin-top: -9.5rem;
+    display: inline-block; /* required for webkit browsers */
+    min-width: 100%;
+    max-width: 100%;
+}
+
+/*
+.partners {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: stretch;
+    justify-content: center;
+    margin-top: 4em;
+}
+*/
+
+#partners {
+    display: flex;
+    align-items: flex-start;
+    justify-content: start;
+    margin: 4em auto 2em auto;
+}
+
+.partners-view-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    text-align: center;
+
+    margin-right: 1em;
+
+    img {
+        height: 64px;
+    }
+
+    padding: 1.4em;
+}
+
+@media (max-width: 928px) {
+    .details-view-item {
+        width: 100%;
+        flex: auto;
     }
 }
