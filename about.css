@@ -40,8 +40,8 @@
 }
 
 .grid-view {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(auto, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     align-items: flex-start;
     justify-content: space-between;
     flex-basis: auto;
@@ -54,10 +54,9 @@
     padding: 1.5em 2em;
     margin: .8em;
     align-self: stretch;
+    min-width: 310px;
 
     font-size: .92em;
-
-
 
     p {
         color: var(--paragraph-color-2);
@@ -120,7 +119,7 @@
 
 @media (max-width: 1526px) {
     .grid-view {
-        grid-template-columns: repeat(2, minmax(auto, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));
     }
 }
 
