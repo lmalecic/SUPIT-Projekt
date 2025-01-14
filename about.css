@@ -1,3 +1,5 @@
+@import "design.css";
+
 .header-navbar {
     position: sticky;
     top: 7.3rem;
@@ -13,7 +15,6 @@
     z-index: 90;
 
     margin-top: 1em;
-
 }
 
 .header-navbar-item {
@@ -58,9 +59,13 @@
 
     font-size: .92em;
 
+    h2 {
+        margin: 0;
+    }
+
     p {
         color: var(--paragraph-color-2);
-        margin: 1em 0 0 0;
+        margin: .75em 0 0 0;
     }
 
     .year {
@@ -115,6 +120,12 @@
 
 .twocolumn-grid-view {
     grid-template-columns: 1fr 1fr;
+}
+
+.map-view {
+    margin: 0;
+    border: 0;
+    width: 100%;
 }
 
 @media (max-width: 1526px) {
