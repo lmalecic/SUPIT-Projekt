@@ -53,7 +53,7 @@
     --pink: rgb(191,26,102);
     --link-color: var(--pink);
     --link-hover-color: var(--pink);
-    --link-hover-gradient: linear-gradient(30deg, var(--orange) 0%, var(--pink) 100%);
+    --orange-pink-gradient: linear-gradient(30deg, var(--orange) 0%, var(--pink) 100%);
     --paragraph-color-2: #404040;
 
     font-family: "Stolzl", sans-serif;
@@ -62,7 +62,10 @@
 html {
     background: var(--black);
     scroll-behavior: smooth;
-    overflow-x: hidden;
+}
+
+body {
+    contain: paint;
 }
 
 * {
@@ -76,7 +79,7 @@ html {
                          "content"
                          "footer";
     grid-template-columns: 100%;
-    grid-template-rows: 6.5rem 1fr auto;
+    grid-template-rows: 6rem 1fr auto;
     min-height: 100vh;
 }
 
@@ -97,11 +100,13 @@ html {
     justify-content: start;
     position: sticky;
     top: 0;
+    left: 0;
     z-index: 99;
 }
 
 nav {
-    background-color: var(--black);
+    display: flex;
+    flex-flow: column nowrap;
     width: 100%;
 }
 
@@ -109,6 +114,7 @@ nav {
     min-height: 2rem;
     overflow-y: clip;
     display: flex;
+    padding-bottom: 0.5em;
 }
 
 .content {
@@ -119,7 +125,27 @@ nav {
 .footer {
     font-size: 0.8rem;
     color: grey;
-    padding: .5rem;
+    padding: 1.5rem;
+    flex-flow: column nowrap;
+}
+
+.budi-izvrstan {
+    margin-bottom: 1rem;
+
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: white;
+
+    text-align: center;
+    text-transform: uppercase;
+
+    span {
+        color: var(--link-hover-color);
+        background: var(--orange-pink-gradient);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 }
 
 .logo {
@@ -152,13 +178,13 @@ nav {
 
 .navbar-item:hover {
     color: var(--link-hover-color);
-    background: var(--link-hover-gradient);
+    background: var(--orange-pink-gradient);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
     &::before {
-        background-color: var(--link-hover-gradient);
+        background-color: var(--orange-pink-gradient);
     }
 }
 
@@ -260,8 +286,8 @@ a:hover {
 
     video {
         position: absolute;
-        width: min-content;
-        max-width: none;
+        min-width: 100%;
+        min-height: 100%;
         object-fit: cover;
         z-index: 1;
     }

@@ -1,14 +1,10 @@
 @import "design.css";
 
-.content {
-    place-content: center;
-}
-
 #zaiskri {
     color: var(--link-hover-color);
 }
 
 #video {
-    height: 30vh;
+    height: 40vh;
     margin: auto;
 }

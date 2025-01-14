@@ -2,7 +2,7 @@
 
 .header-navbar {
     position: sticky;
-    top: 7.3rem;
+    top: 6.5rem;
 
     min-height: 2rem;
     display: flex;
@@ -12,16 +12,23 @@
     flex-wrap: wrap;
 
     font-size: 1.2em;
-    z-index: 90;
+    z-index: 100;
+}
 
-    margin-top: 1em;
+.header-navbar:before {
+    content: "";
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    z-index: 0;
+    background: linear-gradient(to bottom, white, transparent);
 }
 
 .header-navbar-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 .25em .5em .25em;
+    margin: .5em .25em .5em .25em;
     padding: 0.5em 1em;
     color: #fff;
     font-weight: 1000;
@@ -29,6 +36,7 @@
     
     background-color: var(--black);
     border-radius: 999em;
+    z-index: 1;
 }
 
 .header-navbar-item:hover {
@@ -36,7 +44,7 @@
     text-decoration: none;
 
     &::before {
-        background-color: var(--link-hover-gradient);
+        background-color: var(--orange-pink-gradient);
     }
 }
 
@@ -47,7 +55,7 @@
     justify-content: space-between;
     flex-basis: auto;
     flex-flow: row wrap;
-    margin-top: 2em;
+    margin-bottom: 2em;
 }
 
 .grid-view-item {
@@ -118,14 +126,56 @@
     padding: 1.4em;
 }
 
-.twocolumn-grid-view {
-    grid-template-columns: 1fr 1fr;
-}
-
 .map-view {
     margin: 0;
-    border: 0;
+    padding: 0;
     width: 100%;
+    height: 10em;
+    display: flex;
+
+    iframe {
+        flex: 1;
+        margin: 0;
+        padding: 0;
+        border: none;
+        min-width: 100%;
+    }
+}
+
+.text-icon {
+    display: inline-flex;
+    justify-content: center;
+}
+
+.text-icon:before {
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.3em;
+}
+
+#lokacija > .text-icon:before {
+    background-image: url("icon/icons8-location-48.png");
+}
+
+#kako-do-nas > .text-icon:before {
+    background-image: url("icon/icons8-compass-48.png");
+}
+
+#javni-prijevoz > .text-icon:before {
+    background-image: url("icon/icons8-bus-48.png");
+}
+
+#osobno-vozilo > .text-icon:before {
+    background-image: url("icon/icons8-car-48.png");
+}
+
+#parking > .text-icon:before {
+    background-image: url("icon/icons8-p-button-48.png");
 }
 
 @media (max-width: 1526px) {
