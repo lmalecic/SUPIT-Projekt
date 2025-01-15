@@ -178,14 +178,9 @@
     background-image: url("icon/icons8-p-button-48.png");
 }
 
-@media (max-width: 1526px) {
-    .grid-view {
-        grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));
-    }
-}
-
 @media (max-width: 1080px) {
-    .grid-view {
-        grid-template-columns: 1fr;
+    .grid-view-item {
+        min-width: 0;
+        flex-basis: 100%;
     }
 }
