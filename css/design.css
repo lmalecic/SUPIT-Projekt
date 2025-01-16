@@ -1,7 +1,7 @@
 /* Algebra Font lmao */
 @font-face {
     font-family: 'Stolzl';
-    src: url('font/Stolzl-Thin.woff2') format('woff2');
+    src: url('/font/Stolzl-Thin.woff2') format('woff2');
     font-weight: 100;
     font-style: normal;
     font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: 'Stolzl';
-    src: url('font/Stolzl-Light.woff2') format('woff2');
+    src: url('/font/Stolzl-Light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -17,7 +17,7 @@
 
 @font-face {
     font-family: 'Stolzl';
-    src: url('font/Stolzl-Medium.woff2') format('woff2');
+    src: url('/font/Stolzl-Medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -25,7 +25,7 @@
 
 @font-face {
     font-family: 'Stolzl Book';
-    src: url('font/Stolzl-Book.woff2') format('woff2');
+    src: url('/font/Stolzl-Book.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -33,7 +33,7 @@
 
 @font-face {
     font-family: 'Stolzl';
-    src: url('font/Stolzl-Bold.woff2') format('woff2');
+    src: url('/font/Stolzl-Bold.woff2') format('woff2');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -41,7 +41,7 @@
 
 @font-face {
     font-family: 'Stolzl';
-    src: url('font/Stolzl-Regular.woff2') format('woff2');
+    src: url('/font/Stolzl-Regular.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -299,6 +299,17 @@ a:hover {
     border-radius: .7em;
 
     padding: 1em;
+}
+
+.login-dialog {
+    display: flex;
+    background: red;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
 }
 
 @keyframes textIn {

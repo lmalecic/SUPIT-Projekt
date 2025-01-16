@@ -159,23 +159,23 @@
 }
 
 #lokacija > .text-icon:before {
-    background-image: url("icon/icons8-location-48.png");
+    background-image: url("/icon/icons8-location-48.png");
 }
 
 #kako-do-nas > .text-icon:before {
-    background-image: url("icon/icons8-compass-48.png");
+    background-image: url("/icon/icons8-compass-48.png");
 }
 
 #javni-prijevoz > .text-icon:before {
-    background-image: url("icon/icons8-bus-48.png");
+    background-image: url("/icon/icons8-bus-48.png");
 }
 
 #osobno-vozilo > .text-icon:before {
-    background-image: url("icon/icons8-car-48.png");
+    background-image: url("/icon/icons8-car-48.png");
 }
 
 #parking > .text-icon:before {
-    background-image: url("icon/icons8-p-button-48.png");
+    background-image: url("/icon/icons8-p-button-48.png");
 }
 
 @media (max-width: 1080px) {
