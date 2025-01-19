@@ -6,7 +6,6 @@
     <title>Algebra - O nama</title>
     <link rel="stylesheet" href="css/about.css">
     <script src="js/main.js"></script>
-    <script src="js/about.js"></script>
 </head>
 <body>
     <div class="pageGrid">
@@ -395,5 +394,19 @@
             Luka Malečić @ Sveučilište Algebra, 2024.
         </footer>
     </div>
+    <script>
+        const elements = document.querySelectorAll(".moving-slideshow");
+
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            const items = element.querySelectorAll(".moving-slideshow-item");
+
+            for (let j = 0; j < items.length; j++) {
+                const item = items[j];
+                let dupe = item.cloneNode(true);
+                element.appendChild(dupe);
+            }
+        }
+    </script>
 </body>
 </html>
