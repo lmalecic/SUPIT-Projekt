@@ -230,19 +230,11 @@ a:hover {
     text-decoration: underline;
 }
 
-.user-only {
-    display: none;
+.hidden {
+    display: none !important;
 }
 
-.user-only.loggedIn {
-    display: initial;
-}
-
-.no-user.loggedIn {
-    display: none;
-}
-
-#loginButton, #logoffButton {
+#loginButton, #logoutButton {
     position: absolute;
     right: 1rem;
 }
@@ -459,7 +451,7 @@ a:hover {
 }
 
 @media (max-width: 928px) {
-    #loginButton, #logoffButton {
+    #loginButton, #logoutButton {
         position: relative;
         top: 0;
         right: 0;

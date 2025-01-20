@@ -12,11 +12,11 @@ function showLoggedInUI() {
     const userOnlyElements = document.querySelectorAll(".user-only");
 
     noUserElements.forEach((element) => {
-        element.classList.add("loggedIn");
+        element.classList.add("hidden");
     })
 
     userOnlyElements.forEach((element) => {
-        element.classList.add("loggedIn");
+        element.classList.remove("hidden");
     })
 }
 
@@ -25,11 +25,11 @@ function resetLoggedInChanges() {
     const userOnlyElements = document.querySelectorAll(".user-only");
 
     noUserElements.forEach((element) => {
-        element.classList.remove("loggedIn");
+        element.classList.remove("hidden");
     })
 
     userOnlyElements.forEach((element) => {
-        element.classList.remove("loggedIn");
+        element.classList.add("hidden");
     })
 }
 
@@ -203,7 +203,7 @@ function openLoginDialog() {
     })
 }
 
-function logoff() {
+function logout() {
     localStorage.removeItem("token")
     resetLoggedInChanges();
 }
@@ -212,8 +212,8 @@ window.addEventListener("load", () => {
     const loginButton = document.querySelector("#loginButton")
     loginButton.addEventListener("click", openLoginDialog)
 
-    const logoffButton = document.querySelector("#logoffButton")
-    logoffButton.addEventListener("click", logoff)
+    const logoutButton = document.querySelector("#logoutButton")
+    logoutButton.addEventListener("click", logout)
 
     if (localStorage.getItem("token") !== null) {
         showLoggedInUI();
