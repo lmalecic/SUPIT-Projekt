@@ -7,6 +7,32 @@ function toggleNavBar() {
     }
 }
 
+function showLoggedInUI() {
+    const noUserElements = document.querySelectorAll(".no-user");
+    const userOnlyElements = document.querySelectorAll(".user-only");
+
+    noUserElements.forEach((element) => {
+        element.classList.add("loggedIn");
+    })
+
+    userOnlyElements.forEach((element) => {
+        element.classList.add("loggedIn");
+    })
+}
+
+function resetLoggedInChanges() {
+    const noUserElements = document.querySelectorAll(".no-user");
+    const userOnlyElements = document.querySelectorAll(".user-only");
+
+    noUserElements.forEach((element) => {
+        element.classList.remove("loggedIn");
+    })
+
+    userOnlyElements.forEach((element) => {
+        element.classList.remove("loggedIn");
+    })
+}
+
 function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve,ms))
 }
@@ -19,7 +45,7 @@ function createLoader(loadingText) {
     svg.setAttribute("src", "/icon/infinite-spinner.svg");
     svg.setAttribute("alt", "Loading...");
 
-    const label = document.createElement()
+    const label = document.createElement("p")
 
     container.append(svg, label);
 
@@ -27,14 +53,10 @@ function createLoader(loadingText) {
 }
 
 /* Names from https://www.fantasynamegenerators.com/croatian-names.php */
-const names = ["Andrija","Ante","Adam","Aleksandar","Alan","Antonio","Branimir","Boris","Branko","Bruno","Božo","Božidar","Branislav","Budimir","Benjamin","Cvjetko","Dario","Darko","Damir","Davor","Dino","Danijel","David","Denis","Dominik","Domagoj","Duje","Dražen","Dubravko","Dinko","Dalibor","Dejan","Đuro","Emanuel","Ernest","Emil","Eduard","Edvard","Filip","Franjo","Florijan","Gabrijel","Goran","Gordan","Hrvoje","Igor","Ivan","Ivo","Ivica","Imanuel","Ilija","Josip","Jan","Juraj","Jakov","Jasmin","Karlo","Krešimir","Kristijan","Luka","Lucijan","Ljubomir","Ljudevit","Mario","Marko","Mirko","Matej","Martin","Marin","Mladen","Mislav","Miroslav","Matija","Marijan","Nikola","Nenad","Neven","Oliver","Petar","Pavao","Patrik","Renato","Robert","Stjepan","Silvije","Saša","Siniša","Šime","Tomislav","Tihomir","Toni","Teo","Velimir","Vedran","Viktor","Vinko","Vladimir","Vanja","Vedran","Zdenko","Zdravko","Zvonimir","Zvonko","Zlatko","Zoran","Žarko","Željko","Anamarija","Ana","Anastazija","Anica","Andreja","Anita","Antonija","Anđela","Anja","Branka","Barbara","Blaženka","Božica","Cvijeta","Danica","Danijela","Dijana","Dora","Dubravka","Daria","Dubravka","Dorotea","Đurđa","Ema","Ela","Ena","Elizabeta","Eva","Gabrijela","Gorana","Gordana","Helena","Hana","Irena","Ines","Irma","Ivana","Izabela","Jadranka","Jagoda","Jana","Jasna","Jelena","Josipa","Julija","Katarina","Klara","Kristina","Ksenija","Kornelija","Karolina","Karla","Lana","Laura","Lara","Lea","Lidija","Lucija","Leonarda","Ljiljana","Ljubica","Marta","Magdalena","Marija","Mia","Maja","Marina","Martina","Mateja","Mirjam","Mirjana","Monika","Nada","Natalija","Nevenka","Nikolina","Olga","Petra","Patricija","Paula","Ruža","Ružena","Ružica","Renata","Sara","Sabina","Sandra","Sanja","Stela","Suzana","Snježana","Silvija","Tea","Tamara","Tatjana","Tina","Tihana","Vesna","Valentina","Vlatka","Vanja","Viktorija","Veronika","Vanesa","Zdenka","Zrinka","Zlata","Željka"];
+const names = ["Andrija","Ante","Adam","Aleksandar","Alan","Antonio","Branimir","Boris","Branko","Bruno","Bozo","Bozidar","Branislav","Budimir","Benjamin","Cvjetko","Dario","Darko","Damir","Davor","Dino","Danijel","David","Denis","Dominik","Domagoj","Duje","Drazen","Dubravko","Dinko","Dalibor","Dejan","Djuro","Emanuel","Ernest","Emil","Eduard","Edvard","Filip","Franjo","Florijan","Gabrijel","Goran","Gordan","Hrvoje","Igor","Ivan","Ivo","Ivica","Imanuel","Ilija","Josip","Jan","Juraj","Jakov","Jasmin","Karlo","Kresimir","Kristijan","Luka","Lucijan","Ljubomir","Ljudevit","Mario","Marko","Mirko","Matej","Martin","Marin","Mladen","Mislav","Miroslav","Matija","Marijan","Nikola","Nenad","Neven","Oliver","Petar","Pavao","Patrik","Renato","Robert","Stjepan","Silvije","Sasa","Sinisa","Sime","Tomislav","Tihomir","Toni","Teo","Velimir","Vedran","Viktor","Vinko","Vladimir","Vanja","Vedran","Zdenko","Zdravko","Zvonimir","Zvonko","Zlatko","Zoran","Zarko","Zeljko","Anamarija","Ana","Anastazija","Anica","Andreja","Anita","Antonija","Andjela","Anja","Branka","Barbara","Blazenka","Bozica","Cvijeta","Danica","Danijela","Dijana","Dora","Dubravka","Daria","Dubravka","Dorotea","Djurdja","Ema","Ela","Ena","Elizabeta","Eva","Gabrijela","Gorana","Gordana","Helena","Hana","Irena","Ines","Irma","Ivana","Izabela","Jadranka","Jagoda","Jana","Jasna","Jelena","Josipa","Julija","Katarina","Klara","Kristina","Ksenija","Kornelija","Karolina","Karla","Lana","Laura","Lara","Lea","Lidija","Lucija","Leonarda","Ljiljana","Ljubica","Marta","Magdalena","Marija","Mia","Maja","Marina","Martina","Mateja","Mirjam","Mirjana","Monika","Nada","Natalija","Nevenka","Nikolina","Olga","Petra","Patricija","Paula","Ruza","Ruzena","Ruzica","Renata","Sara","Sabina","Sandra","Sanja","Stela","Suzana","Snjezana","Silvija","Tea","Tamara","Tatjana","Tina","Tihana","Vesna","Valentina","Vlatka","Vanja","Viktorija","Veronika","Vanesa","Zdenka","Zrinka","Zlata","Zeljka"];
 function getRandomUsername() {
     const name = names[Math.floor(Math.random() * names.length)];
-    let numbers = "";
-
-    for (let i = 0; i < Math.floor(Math.random() * 5); i++) {
-        numbers += Math.floor(Math.random() * 10);
-    }
+    const numbers = Math.floor(Math.random() * 9999)
 
     return name + numbers;
 }
@@ -93,6 +115,14 @@ function openLoginDialog() {
         timeout(500).then(() => overlay.remove());
     }
 
+    function showSuccess() {
+
+    }
+
+    function showFailure(errorMessage) {
+
+    }
+
     overlay.addEventListener("click", closeDialog)
     closeButton.addEventListener("click", closeDialog)
 
@@ -149,7 +179,19 @@ function openLoginDialog() {
             }
         })
             .then(response => response.json())
-            .then(result => console.log(result))
+            .then(result => {
+                console.log(result);
+
+                if (!result.isSuccess) {
+                    console.log(`Login failed! Error message: ${result.errorMessages[0]}`);
+                    showFailure(result.errorMessages[0]);
+                    return;
+                }
+
+                localStorage.setItem("token", result.data.token);
+                showSuccess();
+                showLoggedInUI();
+            })
             .catch(console.error);
     })
 
@@ -161,7 +203,19 @@ function openLoginDialog() {
     })
 }
 
+function logoff() {
+    localStorage.removeItem("token")
+    resetLoggedInChanges();
+}
+
 window.addEventListener("load", () => {
     const loginButton = document.querySelector("#loginButton")
     loginButton.addEventListener("click", openLoginDialog)
+
+    const logoffButton = document.querySelector("#logoffButton")
+    logoffButton.addEventListener("click", logoff)
+
+    if (localStorage.getItem("token") !== null) {
+        showLoggedInUI();
+    }
 });

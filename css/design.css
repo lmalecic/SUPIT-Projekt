@@ -191,14 +191,6 @@ nav {
     }
 }
 
-#nastavniPlan {
-    display: none;
-
-    &.isLoggedIn {
-        display: inline-block;
-    }
-}
-
 #hamburgerButton {
     display: none;
     background: var(--black);
@@ -238,7 +230,19 @@ a:hover {
     text-decoration: underline;
 }
 
-#loginButton {
+.user-only {
+    display: none;
+}
+
+.user-only.loggedIn {
+    display: initial;
+}
+
+.no-user.loggedIn {
+    display: none;
+}
+
+#loginButton, #logoffButton {
     position: absolute;
     right: 1rem;
 }
@@ -455,7 +459,7 @@ a:hover {
 }
 
 @media (max-width: 928px) {
-    #loginButton {
+    #loginButton, #logoffButton {
         position: relative;
         top: 0;
         right: 0;
