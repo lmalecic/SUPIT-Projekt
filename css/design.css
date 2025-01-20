@@ -55,6 +55,7 @@
     --link-hover-color: var(--pink);
     --orange-pink-gradient: linear-gradient(30deg, var(--orange) 0%, var(--pink) 100%);
     --paragraph-color-2: #404040;
+    --back: cubic-bezier(0.34, 1.56, 0.64, 1);
 
     font-family: "Stolzl", sans-serif;
 }
@@ -320,6 +321,11 @@ a:hover {
     backdrop-filter: blur(8px);
 }
 
+.closed {
+    opacity: 0;
+    transform: scale(0.5) !important;
+}
+
 .login-dialog {
     display: flex;
     background: white;
@@ -327,10 +333,9 @@ a:hover {
     min-width: 4em;
     z-index: 151;
     position: sticky;
-    left: 50vw;
     top: 50vh;
-    width: 20vw;
-    transform: translate(-50%, -50%);
+    left: 50vw;
+    width: 400px;
     padding: 1em;
 
     flex-direction: column;
@@ -338,7 +343,34 @@ a:hover {
 
     border-radius: .8em;
 
-    --item-border-radius: 0.5em;
+    --item-border-radius: 0.5rem;
+
+    transform-origin: center;
+    translate: -50% -50%;
+    transform: scale(1);
+    transition: transform .4s var(--back), opacity .3s ease;
+
+    .close {
+        content: "";
+        background: url("/icon/icons8-close-48.png") no-repeat center/contain;
+        filter: invert(1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        position: absolute;
+        align-self: end;
+        width: 2em;
+        aspect-ratio: 1;
+
+        transform-origin: center;
+        transition: all .2s var(--back);
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+    }
 
     form {
         display: flex;
@@ -351,16 +383,29 @@ a:hover {
     }
 
     label {
+        font-size: 1.1em;
         margin-bottom: 0.2em;
+    }
+
+    label[for="register"] {
+        text-align: center;
     }
 
     input[type="text"], input[type="password"] {
         background: rgba(0,0,0,5%);
         border: 2px solid rgba(0,0,0,10%);
+        outline: 0 solid var(--pink);
         border-radius: var(--item-border-radius);
-        margin-bottom: 0.5em;
+        margin-bottom: 1em;
         padding: 0.5em 1em 0.5em 1em;
         font-family: Stolzl, sans-serif;
+        font-size: 1.1em;
+
+        transition: all 0.05s ease;
+
+        &:focus {
+            outline: 3px solid var(--pink);
+        }
     }
 
     input[type="submit"] {
@@ -376,14 +421,23 @@ a:hover {
         color: white;
         text-transform: uppercase;
 
-        margin-top: 0.5em;
+        transition: all 0.15s ease;
 
         &:hover {
             cursor: pointer;
+            background: color-mix(in srgb, var(--pink) 80%, white 20%);
+        }
+
+        &:active {
+            background: color-mix(in srgb, var(--pink) 80%, black 20%);
         }
     }
 }
 
+.loader {
+    aspect-ratio: 2;
+    height: 2em;
+}
 
 @keyframes textIn {
     from { transform: translateY(.5em); }
