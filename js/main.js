@@ -37,19 +37,13 @@ function timeout(ms) {
     return new Promise(resolve => setTimeout(resolve,ms))
 }
 
-function createLoader(loadingText) {
-    const container = document.createElement("div");
-    container.className = "loader";
-
+function createLoader() {
     const svg = document.createElement("img");
+    svg.className = "loader";
     svg.setAttribute("src", "/icon/infinite-spinner.svg");
     svg.setAttribute("alt", "Loading...");
 
-    const label = document.createElement("p")
-
-    container.append(svg, label);
-
-    return container;
+    return svg;
 }
 
 /* Names from https://www.fantasynamegenerators.com/croatian-names.php */
@@ -61,17 +55,68 @@ function getRandomUsername() {
     return name + numbers;
 }
 
-function openLoginDialog() {
+function createModal(titleString) {
     const overlay = document.createElement("div");
     overlay.className = "dark-overlay"
 
-    const element = document.createElement("dialog");
-    element.className = "login-dialog closed";
+    const element = document.createElement("div");
+    element.className = "modal closed";
 
     const title = document.createElement("h2");
-    title.textContent = "Prijava";
+    title.textContent = titleString;
     const closeButton = document.createElement("button");
     closeButton.className = "close";
+
+    function close() {
+        element.classList.add("closed");
+        overlay.classList.remove("fade-in");
+        timeout(500).then(() => overlay.remove());
+    }
+
+    overlay.addEventListener("click", close)
+    closeButton.addEventListener("click", close)
+
+    element.addEventListener("click", (event) => {
+        event.stopPropagation();
+    })
+
+    element.append(title, closeButton);
+    overlay.appendChild(element);
+
+    return {
+        reference: element,
+        overlay: overlay,
+        title: title,
+        closeButton: closeButton,
+
+        close: close,
+        open: () => {
+            document.body.appendChild(overlay);
+            timeout(10).then(() => {
+                overlay.classList.add("fade-in");
+                element.classList.remove("closed");
+            })
+        }
+    }
+}
+
+function createInfoModal(title, message) {
+    const modal = createModal(title)
+    modal.reference.classList.add("info");
+
+    const msg = document.createElement("p");
+    msg.textContent = message;
+
+    modal.reference.appendChild(msg);
+
+    return modal;
+}
+
+function createLoginModal() {
+    const modal = createModal("Prijava");
+
+    const message = document.createElement("p");
+    message.className = "messageBox container hidden reset";
 
     const form = document.createElement("form");
 
@@ -83,6 +128,7 @@ function openLoginDialog() {
     usernameInput.setAttribute("type", "text");
     usernameInput.setAttribute("name", "username");
     usernameInput.setAttribute("placeholder", `${getRandomUsername().toLowerCase()}`);
+    usernameInput.setAttribute("spellcheck", "false");
 
     const passwordLabel = document.createElement("label");
     passwordLabel.textContent = "Zaporka";
@@ -92,51 +138,51 @@ function openLoginDialog() {
     passwordInput.setAttribute("type", "password");
     passwordInput.setAttribute("name", "password");
     passwordInput.setAttribute("placeholder", "•".repeat(8 + Math.floor(Math.random() * 8)));
+    passwordInput.setAttribute("spellcheck", "false");
 
+    const loginBtnContainer = document.createElement("div");
     const loginButton = document.createElement("input");
     loginButton.setAttribute("type", "submit");
     loginButton.setAttribute("name", "login");
     loginButton.setAttribute("value", "Prijavi se")
+    loginBtnContainer.appendChild(loginButton);
 
     const registerLabel = document.createElement("label");
     registerLabel.textContent = "ili";
     registerLabel.setAttribute("for", "register");
+    const regBtnContainer = document.createElement("div");
     const registerButton = document.createElement("input");
     registerButton.setAttribute("type", "submit");
     registerButton.setAttribute("name", "register");
     registerButton.setAttribute("value", "Registriraj se")
+    regBtnContainer.appendChild(registerButton);
 
     const loader = createLoader()
-    loader.style.display = "none";
 
-    function closeDialog() {
-        element.classList.add("closed");
-        overlay.classList.remove("fade-in");
-        timeout(500).then(() => overlay.remove());
+    function resetMessageBox() {
+        message.className = "messageBox container hidden";
     }
 
-    function showSuccess() {
-
+    async function showSuccess(successMessage) {
+        resetMessageBox()
+        await timeout(10)
+        message.style.animation = "msgBoxAnim 0.5s var(--easeOutExpo)"
+        message.className = "messageBox successBg container"
+        message.textContent = successMessage;
     }
 
-    function showFailure(errorMessage) {
-
+    async function showFailure(errorMessage) {
+        resetMessageBox()
+        await timeout(10)
+        message.style.animation = "msgBoxAnim 0.5s var(--easeOutExpo)"
+        message.className = "messageBox errorBg container"
+        message.textContent = "⚠️ " + errorMessage + " ⚠️";
     }
 
-    overlay.addEventListener("click", closeDialog)
-    closeButton.addEventListener("click", closeDialog)
-
-    element.addEventListener("click", (event) => {
-        event.stopPropagation();
-    })
-
-    form.append(usernameLabel, usernameInput, passwordLabel, passwordInput, loginButton, registerLabel, registerButton);
-    element.append(title, closeButton, form, loader);
-    overlay.appendChild(element);
+    form.append(usernameLabel, usernameInput, passwordLabel, passwordInput, loginBtnContainer, registerLabel, regBtnContainer);
+    modal.reference.append(message, form);
 
     let submitType = "";
-    let pending = false;
-    let submitted = false;
 
     form.querySelectorAll("input[type=submit]").forEach(submitButton => {
         submitButton.addEventListener("click", () => {
@@ -151,22 +197,29 @@ function openLoginDialog() {
         const password = passwordInput.value;
 
         form.reset();
-        form.style.display = "none";
-        loader.style.display = "block";
 
         let url = "";
 
         switch (submitType) {
             case "login":
-                url = "https://www.fulek.com/data/api/user/login";
-                break;
+                url = "https://www.fulek.com/data/api/user/login"
+                loginButton.setAttribute("value", "");
+                loginBtnContainer.appendChild(loader);
+                break
             case "register":
-                url = "https://www.fulek.com/data/api/user/register";
-                break;
+                url = "https://www.fulek.com/data/api/user/register"
+                registerButton.setAttribute("value", "");
+                regBtnContainer.appendChild(loader);
+                break
             default:
-                console.error(`No implementation for submitType=${submitType} :(`);
-                break;
+                console.error(`No implementation for submitType=${submitType} :(`)
+                break
         }
+
+        usernameInput.disabled = true;
+        passwordInput.disabled = true;
+        loginButton.disabled = true;
+        registerButton.disabled = true;
 
         fetch(url, {
             method: "POST",
@@ -182,40 +235,91 @@ function openLoginDialog() {
             .then(result => {
                 console.log(result);
 
-                if (!result.isSuccess) {
-                    console.log(`Login failed! Error message: ${result.errorMessages[0]}`);
-                    showFailure(result.errorMessages[0]);
-                    return;
+                switch (submitType) {
+                    case "login":
+                        if (!result.isSuccess) {
+                            console.error(result.errorMessages)
+                            showFailure("Prijava neuspješna; " + result.errorMessages[0]).catch(console.error);
+                            return
+                        }
+
+                        showSuccess("Prijava uspješna, prozor će se uskoro zatvoriti.").catch(console.error);
+
+                        localStorage.setItem("token", result.data.token);
+                        localStorage.setItem("username", result.data.username);
+
+                        showLoggedInUI();
+                        timeout(1500).then(modal.close).catch(console.error);
+
+                        break
+                    case "register":
+                        if (!result.isSuccess) {
+                            console.error(result.errorMessages)
+                            showFailure("Registracija neuspješna; " + result.errorMessages[0]).catch(console.error);
+                            return
+                        }
+
+                        showSuccess("Registracija uspješna, možete se sada prijaviti.").catch(console.error);
+                        break
                 }
-
-                localStorage.setItem("token", result.data.token);
-                showSuccess();
-                showLoggedInUI();
             })
-            .catch(console.error);
+            .catch(error => {
+                console.error(error);
+                showFailure("Došlo je do nepoznate pogreške, probajte ponovno.").catch(console.error);
+            })
+            .finally(() => {
+                loader.parentNode.removeChild(loader);
+
+                loginButton.setAttribute("value", "Prijavi se");
+                registerButton.setAttribute("value", "Registriraj se");
+
+                usernameInput.disabled = false;
+                passwordInput.disabled = false;
+                loginButton.disabled = false;
+                registerButton.disabled = false;
+            });
     })
 
-    document.body.appendChild(overlay);
-
-    timeout(10).then(() => {
-        overlay.classList.add("fade-in");
-        element.classList.remove("closed");
-    })
+    return modal
 }
 
 function logout() {
+    const infoModal = createInfoModal("Odjava", "Uspješno ste odjavljeni.")
+
+    infoModal.open()
+    timeout(1500).then(infoModal.close).catch(console.error);
+
     localStorage.removeItem("token")
+    localStorage.removeItem("username")
     resetLoggedInChanges();
 }
 
 window.addEventListener("load", () => {
-    const loginButton = document.querySelector("#loginButton")
-    loginButton.addEventListener("click", openLoginDialog)
-
+    let logoutClickCount = 0;
     const logoutButton = document.querySelector("#logoutButton")
-    logoutButton.addEventListener("click", logout)
+    const originalLogoutText = logoutButton.textContent;
 
-    if (localStorage.getItem("token") !== null) {
+    logoutButton.addEventListener("click", () => {
+        if (logoutClickCount >= 1) {
+            logout();
+        } else {
+            logoutClickCount++;
+            logoutButton.classList.add("confirm");
+            logoutButton.textContent = "Potvrdi odjavu";
+        }
+    })
+
+    logoutButton.addEventListener("mouseout", () => {
+        logoutClickCount = 0;
+        logoutButton.classList.remove("confirm");
+        logoutButton.textContent = originalLogoutText;
+    })
+
+    if (localStorage.getItem("token")) {
         showLoggedInUI();
     }
+
+    document.querySelector("#loginButton").addEventListener("click", () => {
+        createLoginModal().open();
+    })
 });

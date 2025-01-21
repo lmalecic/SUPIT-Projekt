@@ -56,19 +56,19 @@
     --orange-pink-gradient: linear-gradient(30deg, var(--orange) 0%, var(--pink) 100%);
     --paragraph-color-2: #404040;
     --back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
 
     font-family: "Stolzl", sans-serif;
 }
 
 html {
     background: var(--black);
-    overflow-x: hidden;
-    overflow-y: scroll;
     scroll-behavior: smooth;
 }
 
 body {
     contain: paint;
+    overflow-y: clip;
 }
 
 * {
@@ -82,8 +82,10 @@ body {
                          "content"
                          "footer";
     grid-template-columns: 100%;
-    grid-template-rows: 6rem 1fr auto;
-    min-height: 100vh;
+    grid-template-rows: 6rem auto auto;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 .header, .navbar, .footer {
@@ -123,6 +125,7 @@ nav {
 .content {
     background: white;
     padding: 2rem 10vw;
+    z-index: 98;
 }
 
 .footer {
@@ -239,6 +242,10 @@ a:hover {
     right: 1rem;
 }
 
+#logoutButton.confirm {
+    --icon: url("/icon/icons8-exclamation-question-mark-48.png") !important;
+}
+
 .video-container, .img-header {
     display: flex;
     align-items: center;
@@ -301,15 +308,20 @@ a:hover {
 }
 
 .dark-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     position: fixed;
     top: 0;
+    left: 0;
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     z-index: 150;
     background: rgb(0,0,0);
     background: rgba(0,0,0,0);
     backdrop-filter: blur(0);
-    transition: background-color .5s ease, backdrop-filter .5s ease;
+    transition: background-color .5s var(--easeOutExpo), backdrop-filter .5s var(--easeOutExpo);
 }
 
 .fade-in {
@@ -322,17 +334,21 @@ a:hover {
     transform: scale(0.5) !important;
 }
 
-.login-dialog {
+.modal.info {
+    p {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.modal {
     display: flex;
     background: white;
     border: solid 3px rgba(0,0,0,15%);
-    min-width: 4em;
     z-index: 151;
-    position: sticky;
-    top: 50vh;
-    left: 50vw;
     width: 400px;
     padding: 1em;
+    margin: 0 2em;
 
     flex-direction: column;
     gap: 0.5em;
@@ -342,7 +358,6 @@ a:hover {
     --item-border-radius: 0.5rem;
 
     transform-origin: center;
-    translate: -50% -50%;
     transform: scale(1);
     transition: transform .4s var(--back), opacity .3s ease;
 
@@ -368,14 +383,18 @@ a:hover {
         }
     }
 
+    h2 {
+        margin-bottom: 0.5em;
+    }
+
+    p {
+        text-align: left;
+    }
+
     form {
         display: flex;
         flex-direction: column;
         gap: 0.5em;
-    }
-
-    h2 {
-        margin-bottom: 0.5em;
     }
 
     label {
@@ -406,6 +425,7 @@ a:hover {
 
     input[type="submit"] {
         padding: .5em;
+        width: 100%;
 
         background: var(--pink);
         border: 2px solid rgba(0,0,0,10%);
@@ -419,7 +439,7 @@ a:hover {
 
         transition: all 0.15s ease;
 
-        &:hover {
+        &:not([disabled]):hover {
             cursor: pointer;
             background: color-mix(in srgb, var(--pink) 80%, white 20%);
         }
@@ -427,12 +447,55 @@ a:hover {
         &:active {
             background: color-mix(in srgb, var(--pink) 80%, black 20%);
         }
+
+        &:disabled {
+            background: rgb(150, 150, 150);
+        }
+    }
+
+    * {
+        position: relative;
     }
 }
 
+@keyframes msgBoxAnim {
+    from {
+        opacity: 0;
+        transform: scaleY(0);
+    }
+    to {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+}
+
+.messageBox {
+    margin: 0 0 .5em 0;
+    font-size: 1em;
+    text-align: center !important;
+    text-wrap: wrap;
+    transform-origin: top;
+    transition: transform .5s var(--easeOutExpo), opacity .5s var(--easeOutExpo);
+}
+
+.errorBg {
+    background: rgb(255,70,70);
+    border-color: rgba(0,0,0,10%);
+    color: white;
+}
+
+.successBg {
+    background: rgb(122,255,122);
+    border-color: rgba(0,0,0,10%);
+}
+
 .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     aspect-ratio: 2;
-    height: 2em;
+    height: 1em;
 }
 
 @keyframes textIn {
@@ -483,5 +546,11 @@ a:hover {
 
     #hamburgerButton {
         display: flex;
+    }
+}
+
+@media (max-width: 500px) {
+    .modal {
+        width: 100%;
     }
 }
