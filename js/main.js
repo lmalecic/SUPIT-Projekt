@@ -306,6 +306,7 @@ window.addEventListener("load", () => {
             logoutClickCount++;
             logoutButton.classList.add("confirm");
             logoutButton.textContent = "Potvrdi odjavu";
+            logoutButton.style.animation = "logoutConfirm 1s var(--easeOutExpo)";
         }
     })
 
@@ -313,6 +314,7 @@ window.addEventListener("load", () => {
         logoutClickCount = 0;
         logoutButton.classList.remove("confirm");
         logoutButton.textContent = originalLogoutText;
+        logoutButton.style.animation = "";
     })
 
     if (localStorage.getItem("token")) {

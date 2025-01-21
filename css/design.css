@@ -63,12 +63,15 @@
 
 html {
     background: var(--black);
-    scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    contain: paint;
 }
 
 body {
+    overflow-x: hidden;
+    overflow-y: hidden;
     contain: paint;
-    overflow-y: clip;
 }
 
 * {
@@ -84,8 +87,11 @@ body {
     grid-template-columns: 100%;
     grid-template-rows: 6rem auto auto;
     height: 100vh;
+
     overflow-x: hidden;
     overflow-y: scroll;
+    scroll-behavior: smooth;
+    contain: paint;
 }
 
 .header, .navbar, .footer {
@@ -244,6 +250,11 @@ a:hover {
 
 #logoutButton.confirm {
     --icon: url("/icon/icons8-exclamation-question-mark-48.png") !important;
+}
+
+@keyframes logoutConfirm {
+    from { transform: rotate(10deg) }
+    to { transform: rotate(0deg) }
 }
 
 .video-container, .img-header {
