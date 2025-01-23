@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algebra - Novosti</title>
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/news.css">
+  <script src="js/main.js"></script>
+</head>
+<body>
+<div class="pageGrid">
+  <header class="header">
+    <a href="index.html" class="logo"></a>
+    <nav>
+      <div class="navbar">
+        <a class="navbar-item" href="index.html" style="--icon: url('/icon/icons8-house-48.png')">Početna</a>
+        <a class="navbar-item" href="about.html" style="--icon: url('/icon/icons8-speech-48.png')">O nama</a>
+        <a class="navbar-item" href="news.html" style="--icon: url('/icon/icons8-news-48.png')">Novosti</a>
+        <a class="navbar-item user-only hidden" id="nastavniPlan" href="nastavniplan.html" style="--icon: url('/icon/icons8-books-48.png')">Nastavni plan</a>
+        <a class="navbar-item" href="contact.html" style="--icon: url('/icon/icons8-email-48.png')">Kontakt</a>
+        <a class="navbar-item no-user" id="loginButton" href="javascript:void(0)" style="--icon: url('/icon/icons8-key-48.png')">Prijava</a>
+        <a class="navbar-item user-only hidden" id="logoutButton" href="javascript:void(0)" style="--icon: url('/icon/icons8-dashing-away-48.png')">Odjava</a>
+      </div>
+
+      <a class="navbar-item" id="hamburgerButton" href="javascript:void(0)" onclick="toggleNavBar()">
+        <img src="/icon/icons8-hamburger-menu-50.png" alt="Expand">
+      </a>
+    </nav>
+  </header>
+
+  <main class="content">
+    <div class="img-header" style="--src: url('/img/earth.jpg')">
+      <span class="text-appear">Novosti</span>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <div class="budi-izvrstan">
+      Budi izvrstan u onom što voliš.
+      <br>
+      <span>Zaiskri.</span>
+    </div>
+    Luka Malečić @ Sveučilište Algebra, 2024.
+  </footer>
+</div>
+</body>
+</html>
