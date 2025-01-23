@@ -84,6 +84,6 @@
 @media (max-width: 878px) {
     .news-feed-item {
         max-width: 0;
-        min-width: 80%;
+        min-width: 90%;
     }
 }
