@@ -17,6 +17,9 @@
     overflow: clip;
     color: black;
 
+    min-width: 310px;
+    max-width: 30%;
+
     .news-feed-img-container {
         width: 100%;
         flex-basis: 60%;
@@ -69,5 +72,18 @@
         .news-feed-img-container {
             flex-basis: 50%;
         }
+    }
+}
+
+ @media (max-width: 1225px) {
+     .news-feed-item {
+         max-width: 50%;
+     }
+ }
+
+@media (max-width: 878px) {
+    .news-feed-item {
+        max-width: 0;
+        min-width: 80%;
     }
 }
