@@ -129,6 +129,11 @@ nav {
 }
 
 .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     background: white;
     padding: 2rem 10vw;
     z-index: 98;
@@ -257,6 +262,16 @@ a:hover {
     to { transform: rotate(0deg) }
 }
 
+@keyframes textIn {
+    from { transform: translateY(.5em); }
+    to { transform: translateY(0); }
+}
+
+@keyframes textIn2 {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
 .video-container, .img-header {
     display: flex;
     align-items: center;
@@ -266,7 +281,8 @@ a:hover {
     flex-direction: column;
     border-radius: min(10vw, 2rem);
     overflow: clip;
-    width: auto;
+    box-sizing: border-box;
+    width: 100%;
     margin: 0 .5em 1.5rem .5em;
     position: relative;
     border: solid 3px rgba(0,0,0,10%);
@@ -278,6 +294,9 @@ a:hover {
     text-align: center;
 
     padding: 2em;
+
+    opacity: 0;
+    animation: textIn .5s  .5s forwards, textIn2 1s cubic-bezier(0.34, 1.56, 0.64, 1) .5s forwards;
 
     * {
         max-width: 80%;
@@ -469,6 +488,21 @@ a:hover {
     }
 }
 
+.video-play-icon {
+    background-image: url("/icon/play.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: .5;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    aspect-ratio: 1;
+    height: 4rem;
+    z-index: 2;
+}
+
 @keyframes msgBoxAnim {
     from {
         opacity: 0;
@@ -507,21 +541,6 @@ a:hover {
     transform: translate(-50%, -50%);
     aspect-ratio: 2;
     height: 1em;
-}
-
-@keyframes textIn {
-    from { transform: translateY(.5em); }
-    to { transform: translateY(0); }
-}
-
-@keyframes textIn2 {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.text-appear {
-    opacity: 0;
-    animation: textIn .5s  .5s forwards, textIn2 1s cubic-bezier(0.34, 1.56, 0.64, 1) .5s forwards;
 }
 
 @media (max-width: 928px) {

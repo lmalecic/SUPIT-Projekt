@@ -3,10 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Algebra - Novosti</title>
-    <link rel="stylesheet" href="css/index.css">
+    <title>Algebra - Student Josip Stanešić 12. je sistemaš svijeta i dobitnik medalje izvrsnosti</title>
+    <link rel="stylesheet" href="css/design.css">
     <link rel="stylesheet" href="css/news.css">
     <script src="js/main.js"></script>
+    <script src="fancybox/fancybox.umd.js"></script>
+    <link rel="stylesheet" href="fancybox/fancybox.css" />
+
+    <style>
+        .images {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            height: auto;
+            padding: 0 20%;
+
+            .image-item {
+                display: inline;
+                flex: 1;
+                height: 15em;
+                padding: 0;
+                overflow: clip;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+
+                    object-fit: cover;
+                    transition: transform .5s var(--easeOutExpo);
+                }
+
+                &:hover>img {
+                    transform: scale(1.1);
+                }
+            }
+
+            .video-item {
+                position: relative;
+                padding: 0;
+                overflow: clip;
+
+                video {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform .5s var(--easeOutExpo);
+                }
+
+                &:hover>video {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="pageGrid">
@@ -30,10 +80,40 @@
     </header>
 
     <main class="content">
-        <div class="img-header text-appear" style="--src: url('/img/earth.jpg')">
+        <div class="img-header text-appear" style="--src: url('/img/novost1.jpg')">
             Student Josip Stanešić 12. je sistemaš svijeta i dobitnik medalje izvrsnosti.
         </div>
-
+        <h1>WorldSkills natjecanje - Kazan 2019.</h1>
+        <p>
+            Nakon godinu dana priprema za natjecanje WorldSkills
+            Kazan 2019 na kojem je sudjelovalo 1300 natjecatelja iz
+            cijelog svijeta, trud se itekako isplatio. Josip,
+            student 3. godine preddiplomskog studija sistemskog
+            inženjerstva osvojio je 12. mjesto u vještini IT
+            Networks and System Administration te osvojio medalju
+            izvrsnosti! Čestitke Josipu ali i njegovim/našim
+            mentorima koji su ga pripremali za ovo natjecanje –
+            voditelju studija sistemskog inženjerstva Silviju
+            Papiću, voditelju katedre za operacijske sustave –
+            Vedranu Dakiću i asistentu na studiju sistemskog
+            inženjerstva – Jasminu Redžepagiću. Čestitke i našem
+            studentu 3.godine preddiplomskog studija programskog
+            inženjerstva Josipu Horvatu i mentoru voditelju katedre
+            za programsko inženjerstvo - Goranu Đambiću na osvojenom
+            16.mjestu u vještini IT Software Solutions for Business.
+        </p>
+        <div class="images">
+            <a class="image-item container" href="img/galerija1.jpg" data-fancybox="gallery-1" data-caption="Slika 1">
+                <img src="img/galerija1.jpg" alt="Slika 1">
+            </a>
+            <a class="image-item container" href="img/galerija2.jpg" data-fancybox="gallery-1" data-caption="Slika 2">
+                <img src="img/galerija2.jpg" alt="Slika 2">
+            </a>
+            <a class="video-item container" href="video/worldskills.mp4" data-fancybox="gallery-1" data-caption="Video">
+                <video src="video/worldskills.mp4"></video>
+                <div class="video-play-icon"></div>
+            </a>
+        </div>
     </main>
 
     <footer class="footer">
@@ -45,5 +125,11 @@
         Luka Malečić @ Sveučilište Algebra, 2024.
     </footer>
 </div>
+
+<script>
+    Fancybox.bind('[data-fancybox="gallery-1"]', {
+
+    })
+</script>
 </body>
 </html>
