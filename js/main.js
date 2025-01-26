@@ -324,4 +324,6 @@ window.addEventListener("load", () => {
     document.querySelector("#loginButton").addEventListener("click", () => {
         createLoginModal().open();
     })
+
+
 });
