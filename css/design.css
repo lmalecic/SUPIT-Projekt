@@ -285,7 +285,7 @@ a:hover {
     width: 100%;
     margin: 0 .5em 1.5rem .5em;
     position: relative;
-    border: solid 3px rgba(0,0,0,10%);
+    border: solid 2px rgba(0,0,0,10%);
 
     color: white;
     font-size: clamp(2.4rem, 4vw, 3.2rem);
@@ -331,7 +331,7 @@ a:hover {
 
 .container {
     background: rgba(0,0,0,2%);
-    border: solid 3px rgba(0,0,0,5%);
+    border: solid 2px rgba(0,0,0,5%);
     border-radius: .7em;
 
     padding: 1em;
@@ -367,14 +367,14 @@ a:hover {
 .modal.info {
     p {
         padding: 0;
-        margin: 0;
+        margin: 0 0 .3em 0;
     }
 }
 
 .modal {
     display: flex;
     background: white;
-    border: solid 3px rgba(0,0,0,15%);
+    border: solid 2px rgba(0,0,0,15%);
     z-index: 151;
     width: 400px;
     padding: 1em;
@@ -471,7 +471,7 @@ a:hover {
 
         &:not([disabled]):hover {
             cursor: pointer;
-            background: color-mix(in srgb, var(--pink) 80%, white 20%);
+            background: var(--orange);
         }
 
         &:active {
@@ -486,6 +486,56 @@ a:hover {
     * {
         position: relative;
     }
+}
+
+.importanceInputContainer {
+    display: inline-block;
+
+    input[type="radio"] {
+        appearance: none;
+        background: rgba(0,0,0,0);
+        aspect-ratio: 1;
+        height: 3em;
+        padding: .5em;
+
+        transition: background-color .2s var(--easeOutExpo);
+
+        &:hover {
+            cursor: pointer;
+            background: rgba(0,0,0,0.05);
+        }
+
+        &:active, &:checked {
+            background: rgba(0,0,0,0.1) !important;
+        }
+    }
+}
+
+.lowImportance:after {
+    content: "";
+    display: inline-block;
+    background: url("/icon/lowImportance.png") no-repeat center/contain;
+    aspect-ratio: 1;
+    height: 100%;
+    width: 100%;
+}
+
+.mediumImportance:after {
+    content: "";
+    display: inline-block;
+    background: url("/icon/mediumImportance.png") no-repeat center/contain;
+    aspect-ratio: 1;
+    height: 100%;
+    width: 100%;
+}
+
+.highImportance:after {
+    content: "";
+    display: inline-block;
+    background: url("/icon/highImportance.png") no-repeat center/contain;
+    aspect-ratio: 1;
+    height: 100%;
+    width: 100%;
 }
 
 .video-item {
