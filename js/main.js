@@ -132,7 +132,9 @@ function createModal(titleString) {
 
 function createContactModal() {
     const modal = createModal("Kontaktirajte nas!");
+    modal.reference.classList.add("contact");
     const form = document.createElement("form");
+    form.setAttribute("action", "https://www.fulek.com/mvc/supit/project-contact-form")
 
     const randomPerson = getRandomPerson();
 
@@ -166,24 +168,51 @@ function createContactModal() {
     option1.setAttribute("type", "radio");
     option1.setAttribute("name", "Importance");
     option1.setAttribute("value", "Niska");
+    option1.setAttribute("checked", "true");
+    option1.setAttribute("title", "Niska važnost");
     const option2 = document.createElement("input");
     option2.classList.add("mediumImportance");
     option2.setAttribute("type", "radio");
     option2.setAttribute("name", "Importance");
     option2.setAttribute("value", "Srednja");
+    option2.setAttribute("title", "Srednja važnost");
     const option3 = document.createElement("input");
     option3.classList.add("highImportance");
     option3.setAttribute("type", "radio");
     option3.setAttribute("name", "Importance");
     option3.setAttribute("value", "Visoka");
+    option3.setAttribute("title", "Visoka važnost");
     importanceInputContainer.append(option1, option2, option3);
 
+    const newslettersLabel = document.createElement("label");
+    newslettersLabel.setAttribute("for", "pushNotificationsCheckBox");
+    newslettersLabel.textContent = "Želim primati obavijesti";
+    const newslettersCheckbox = document.createElement("input");
+    newslettersCheckbox.setAttribute("id", "pushNotificationsCheckBox");
+    newslettersCheckbox.setAttribute("type", "checkbox");
+    newslettersCheckbox.setAttribute("name", "ReceiveNewsletter");
+
+    const msgContainer = document.createElement("div");
+    msgContainer.className = "sectionContainer";
+    msgContainer.setAttribute("id", "msgBoxContainer")
+    const messageLabel = document.createElement("label");
+    messageLabel.setAttribute("for", "messageBox")
+    messageLabel.textContent = "Poruka"
+    const messageBox = document.createElement("textarea");
+    messageBox.setAttribute("id", "messageBox");
+    messageBox.setAttribute("name", "Message");
+    messageBox.classList.add("container");
+    msgContainer.append(messageLabel, messageBox);
+
+    const submitBtnContainer = document.createElement("div");
+    submitBtnContainer.className = "btnContainer";
     const submitButton = document.createElement("input");
     submitButton.setAttribute("type", "submit");
     submitButton.setAttribute("name", "submit");
     submitButton.setAttribute("value", "Pošalji");
+    submitBtnContainer.appendChild(submitButton);
 
-    form.append(nameLabel, nameInput, emailLabel, emailInput, importanceLabel, importanceInputContainer, submitButton);
+    form.append(nameLabel, nameInput, emailLabel, emailInput, importanceLabel, importanceInputContainer, newslettersLabel, newslettersCheckbox, msgContainer, submitBtnContainer);
     modal.reference.appendChild(form);
 
     return modal;
@@ -230,6 +259,7 @@ function createLoginModal() {
     passwordInput.setAttribute("spellcheck", "false");
 
     const loginBtnContainer = document.createElement("div");
+    loginBtnContainer.className = "btnContainer";
     const loginButton = document.createElement("input");
     loginButton.setAttribute("type", "submit");
     loginButton.setAttribute("name", "login");
@@ -240,6 +270,7 @@ function createLoginModal() {
     registerLabel.textContent = "ili";
     registerLabel.setAttribute("for", "register");
     const regBtnContainer = document.createElement("div");
+    regBtnContainer.className = "btnContainer";
     const registerButton = document.createElement("input");
     registerButton.setAttribute("type", "submit");
     registerButton.setAttribute("name", "register");

@@ -364,23 +364,18 @@ a:hover {
     transform: scale(0.5) !important;
 }
 
-.modal.info {
-    p {
-        padding: 0;
-        margin: 0 0 .3em 0;
-    }
-}
-
 .modal {
     display: flex;
     background: white;
     border: solid 2px rgba(0,0,0,15%);
     z-index: 151;
-    width: 400px;
     padding: 1em;
     margin: 0 2em;
+    min-width: 400px;
 
     flex-direction: column;
+    align-items: stretch;
+    justify-content: start;
     gap: 0.5em;
 
     border-radius: .8em;
@@ -423,8 +418,13 @@ a:hover {
 
     form {
         display: flex;
-        flex-direction: column;
+        flex-flow: column wrap;
         gap: 0.5em;
+        column-gap: 1.5em;
+        width: 100%;
+        align-items: stretch;
+        padding: 0 3px 0 3px;
+        box-sizing: border-box;
     }
 
     label {
@@ -436,7 +436,18 @@ a:hover {
         text-align: center;
     }
 
-    input[type="text"], input[type="password"] {
+    .btnContainer>* {
+        width: 100%;
+    }
+
+    .sectionContainer {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        gap: .5em;
+    }
+
+    input[type="text"], input[type="password"], textarea {
         background: rgba(0,0,0,5%);
         border: 2px solid rgba(0,0,0,10%);
         outline: 0 solid var(--pink);
@@ -444,18 +455,18 @@ a:hover {
         margin-bottom: 1em;
         padding: 0.5em 1em 0.5em 1em;
         font-family: Stolzl, sans-serif;
-        font-size: 1.1em;
+        font-size: 1em;
+        align-self: stretch;
 
         transition: all 0.05s ease;
 
         &:focus {
-            outline: 3px solid var(--pink);
+            outline: 2px solid var(--pink);
         }
     }
 
     input[type="submit"] {
         padding: .5em;
-        width: 100%;
 
         background: var(--pink);
         border: 2px solid rgba(0,0,0,10%);
@@ -483,33 +494,126 @@ a:hover {
         }
     }
 
+    input[type="checkbox"] {
+        display: inline-flex;
+        align-items: center;
+        align-self: start;
+        appearance: none;
+        background: rgba(0,0,0,.05  );
+        border-radius: 9999rem;
+        aspect-ratio: 2;
+        width: 4rem;
+        border: 2px solid rgba(0,0,0,.1);
+        margin-bottom: 1em;
+
+        transition: background-color .5s var(--easeOutExpo);
+
+        &:after {
+            content: "";
+            background: white;
+            border-radius: 50%;
+            aspect-ratio: 1;
+            height: 75%;
+            overflow: clip;
+            box-shadow: 0 0 6px rgba(0,0,0,.2);
+
+            position: absolute;
+            left: 5%;
+            right: 0;
+            top: 50%;
+            bottom: 50%;
+            transform: translate(0, -50%);
+
+            transition: transform .5s var(--easeOutExpo);
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:checked {
+            background-color: var(--pink);
+
+            &:after {
+                transform: translate(145%,-50%);
+            }
+        }
+    }
+
+    textarea {
+        font-family: "Stolzl", sans-serif;
+        font-size: .9em;
+        min-height: 14em;
+        color: var(--black);
+        padding: 0.5em;
+        resize: none;
+        appearance: none;
+    }
+
     * {
         position: relative;
     }
 }
 
+.modal.contact {
+    width: 700px;
+
+    form {
+        overflow-y: scroll;
+        max-height: 380px;
+        flex-basis: 1fr;
+
+        #msgBoxContainer {
+            min-width: 360px;
+        }
+    }
+}
+
 .importanceInputContainer {
     display: inline-block;
+    margin-bottom: .5rem;
+    max-width: 40%;
 
     input[type="radio"] {
         appearance: none;
+        border-radius: 0.5rem;
+        outline: 0 solid transparent;
         background: rgba(0,0,0,0);
         aspect-ratio: 1;
         height: 3em;
         padding: .5em;
+        margin-right: .75rem;
 
-        transition: background-color .2s var(--easeOutExpo);
+        transition: background .2s var(--easeOutExpo),  outline-color .5s var(--easeOutExpo);
+
+        &:after {
+            transition: transform .3s var(--easeOutExpo);
+        }
 
         &:hover {
             cursor: pointer;
-            background: rgba(0,0,0,0.05);
+            outline: 2px solid color-mix(in srgb, var(--pink), transparent 30%);
+            background: color-mix(in srgb, var(--pink), transparent 80%);
+
+            &:after {
+                transform: scale(1.1);
+            }
         }
 
         &:active, &:checked {
-            background: rgba(0,0,0,0.1) !important;
+            background: color-mix(in srgb, var(--pink), transparent 60%);
+            outline: 2px solid var(--pink);
         }
     }
 }
+
+.modal.info {
+    p {
+        padding: 0;
+        margin: 0 0 .3em 0;
+    }
+}
+
 
 .lowImportance:after {
     content: "";
@@ -640,6 +744,14 @@ a:hover {
 
     #hamburgerButton {
         display: flex;
+    }
+
+    .modal.contact {
+        width: 400px;
+
+        form {
+            flex-flow: column nowrap;
+        }
     }
 }
 
