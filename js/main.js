@@ -404,11 +404,18 @@ function createLoginModal() {
     return modal
 }
 
-function logout() {
-    const infoModal = createInfoModal("Odjava", "Uspješno ste odjavljeni.")
+function logout(ignoreModal) {
+    if (ignoreModal) {
+        window.location.replace("index.html");
+    } else {
+        const infoModal = createInfoModal("Odjava", "Uspješno ste odjavljeni, vraćamo Vas na početnu stranicu...")
+        infoModal.closeButton.style.display = "none";
 
-    infoModal.open()
-    timeout(1500).then(infoModal.close).catch(console.error);
+        infoModal.open()
+        timeout(1000).then(() => {
+            window.location.replace("index.html");
+        }).catch(console.error);
+    }
 
     localStorage.removeItem("token")
     localStorage.removeItem("username")

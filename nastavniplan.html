@@ -5,8 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Algebra - Nastavni plan</title>
   <link rel="stylesheet" href="css/design.css">
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/main.js"></script>
+  <link rel="stylesheet" href="jquery-ui-1.14.1/jquery-ui.min.css">
+  <style>
+    input[type="search"] {
+      background: rgba(0,0,0,5%);
+      width: 70%;
+      border: 2px solid rgba(0,0,0,10%);
+      outline: 0 solid var(--pink);
+      border-radius: 0.5rem;
+      margin-bottom: 1em;
+      padding: 0.5em 1em 0.5em 1em;
+      font-family: Stolzl, sans-serif;
+      font-size: 1em;
+
+      transition: all 0.05s ease;
+
+      &:focus {
+        outline: 2px solid var(--pink);
+      }
+    }
+
+    .tblContainer {
+      display: none;
+      overflow-x: scroll;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      text-align: center;
+
+      td, th {
+        padding: .5em 1em .5em 1em;
+      }
+
+      th {
+        color: var(--pink);
+        font-size: 1.2em;
+      }
+
+      .deleteButton {
+        appearance: none;
+        border-radius: .5rem;
+        border: 2px solid rgba(0,0,0,30%);
+        background: red;
+        aspect-ratio: 1;
+        width: 2rem;
+        padding: 10%;
+
+        transition: background-color 0.2s var(--easeOutExpo);
+
+        &:after {
+          display: inline-block;
+          content: "";
+          background: url("/icon/icons8-close-48.png") no-repeat;
+          background-size: contain;
+          height: 100%;
+          width: 100%;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background: color-mix(in srgb, red, white 40%);
+        }
+
+        &:active {
+          background: color-mix(in srgb, red, black 20%);
+        }
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="pageGrid">
@@ -30,7 +99,30 @@
   </header>
 
   <main class="content">
-
+    <div class="img-header" style="--src: url('/img/nastavniplan.jpg')">
+      <span class="text-appear">Nastavni plan</span>
+    </div>
+    <input id="search" type="search" placeholder="Pretraži kolegij..." style="margin-top: 1em;">
+    <div class="tblContainer" id="kolegijiContainer">
+      <table id="kolegiji">
+        <tr>
+          <th>Kolegij</th>
+          <th>ECTS</th>
+          <th>Sati</th>
+          <th>Predavanja</th>
+          <th>Vježbe</th>
+          <th>Tip</th>
+          <th></th>
+        </tr>
+        <tr id="table-sum">
+          <th style="text-align: right;">&Sigma;</th>
+          <th class="ects">0</th>
+          <th class="sati">0</th>
+          <th class="predavanja">0</th>
+          <th class="vjezbe">0</th>
+        </tr>
+      </table>
+    </div>
   </main>
 
   <footer class="footer">
@@ -42,5 +134,134 @@
     Luka Malečić @ Sveučilište Algebra, 2024.
   </footer>
 </div>
+
+<script src="js/jquery-3.7.1.min.js"></script>
+<script src="jquery-ui-1.14.1/jquery-ui.js"></script>
+<script>
+  let kolegiji = [];
+  let selectedKolegiji = [];
+  let availableTags = [];
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    logout(true);
+    throw new Error("Unauthorized!");
+  }
+
+  function updateTable() {
+    if (selectedKolegiji.length == 0) {
+      $("#kolegijiContainer").hide();
+      return;
+    }
+
+    let sumECTS = 0;
+    let sumSati = 0;
+    let sumPredavanja = 0;
+    let sumVjezbe = 0;
+
+    selectedKolegiji.forEach(kolegij => {
+      sumECTS += kolegij.ects;
+      sumSati += kolegij.sati;
+      sumPredavanja += kolegij.predavanja;
+      sumVjezbe += kolegij.vjezbe;
+    })
+
+    $("#table-sum .ects").text(sumECTS);
+    $("#table-sum .sati").text(sumSati);
+    $("#table-sum .predavanja").text(sumPredavanja);
+    $("#table-sum .vjezbe").text(sumVjezbe);
+
+    $("#kolegijiContainer").show();
+  }
+
+  function getKolegij(name) {
+    return kolegiji.find(item => {
+      return item.kolegij === name;
+    })
+  }
+
+  function removeKolegij(elem, kolegij) {
+    $(elem).remove();
+
+    // ne pitaj zas ovo radi, al radi
+    const index = selectedKolegiji.indexOf(kolegij);
+    if (index !== -1) {
+      return;
+    }
+
+    selectedKolegiji.splice(index, 1);
+    availableTags.push(kolegij);
+    updateTable();
+  }
+
+  function appendKolegij(kolegij) {
+    availableTags.splice(availableTags.indexOf(kolegij.kolegij), 1);
+
+    if (selectedKolegiji.indexOf(kolegij) !== -1) {
+      alert("Već ste unijeli taj kolegij.");
+      return;
+    }
+
+    selectedKolegiji.push(kolegij);
+
+    const row = $(`
+        <tr>
+            <td>${kolegij.kolegij}</td>
+            <td>${kolegij.ects}</td>
+            <td>${kolegij.sati}</td>
+            <td>${kolegij.predavanja}</td>
+            <td>${kolegij.vjezbe}</td>
+            <td>${kolegij.tip}</td>
+            <td>
+                <button class="deleteButton" onclick="removeKolegij(this.parentElement.parentElement, '${kolegij.kolegij}')"></button>
+            </td>
+        </tr>
+    `)
+
+    row.insertBefore($("#table-sum"));
+    updateTable();
+  }
+
+  fetch("https://www.fulek.com/data/api/supit/curriculum-list/hr", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+    }
+  })
+          .then(response => {
+            if (response.status === 401) {
+              logout(true);
+            }
+
+            return response.json();
+          })
+          .then(result => {
+            console.log(result.data);
+            kolegiji = result.data;
+            availableTags = result.data.map(item => item.kolegij);
+
+            $("#search").autocomplete({
+              source: availableTags,
+              autoFocus: true,
+              select: function(event, ui) {
+                const kolegij = getKolegij(ui.item.value);
+                $(this).val("");
+
+                if (!kolegij) {
+                  return;
+                }
+
+                appendKolegij(kolegij);
+
+                return false;
+              },
+            })
+          })
+          .catch(console.error);
+
+  updateTable();
+</script>
+
 </body>
 </html>
