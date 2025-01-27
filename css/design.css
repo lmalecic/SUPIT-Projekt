@@ -502,6 +502,7 @@ a:hover {
         border-radius: 9999rem;
         aspect-ratio: 2;
         width: 4rem;
+        height: auto;
         border: 2px solid rgba(0,0,0,.1);
         margin-bottom: 1em;
 
@@ -534,7 +535,7 @@ a:hover {
             background-color: var(--pink);
 
             &:after {
-                transform: translate(145%,-50%);
+                transform: translate(150%,-50%);
             }
         }
     }
@@ -569,7 +570,8 @@ a:hover {
 }
 
 .importanceInputContainer {
-    display: inline-block;
+    display: inline-flex;
+    align-items: start;
     margin-bottom: .5rem;
     max-width: 40%;
 
@@ -579,6 +581,7 @@ a:hover {
         outline: 0 solid transparent;
         background: rgba(0,0,0,0);
         aspect-ratio: 1;
+        width: 3em;
         height: 3em;
         padding: .5em;
         margin-right: .75rem;
@@ -746,8 +749,6 @@ a:hover {
     }
 
     .modal.contact {
-        width: 400px;
-
         form {
             flex-flow: column nowrap;
         }
@@ -756,6 +757,13 @@ a:hover {
 
 @media (max-width: 500px) {
     .modal {
+        min-width: 0;
         width: 100%;
+    }
+
+    .modal.contact {
+        #msgBoxContainer {
+            min-width: 0 !important;
+        }
     }
 }
